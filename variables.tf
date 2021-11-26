@@ -13,6 +13,11 @@ variable "zone" {
   description = "The zone for the master instance, it should be something like: us-central1-a, us-east1-c, etc."
 }
 
+variable "region" {
+  type        = string
+  description = "The region for the master instance, it should be something like: us-central1-a, us-east1-c, etc."
+}
+
 variable "engine_version" {
   type        = string
   description = ""
@@ -51,6 +56,18 @@ variable "nb_replicas" {
   default     = 0
 }
 
+variable "db_collation" {
+  type        = string
+  description = "Collation for the DB"
+  default     = "utf8_general_ci"
+}
+
+variable "db_charset" {
+  type        = string
+  description = "Charset for the DB"
+  default     = "utf8"
+}
+
 variable "ha_external_ip_range" {
   type        = string
   description = "The ip range to allow connecting from/to Cloud SQL"
@@ -79,3 +96,18 @@ variable "ha_external_ip_range" {
 #   }))
 #   description = ""
 # }
+
+
+variable "list_db" {
+  type = list(object({
+    name = string
+    charset = string
+    collation = string
+  }))
+  description = "List of the default DBs you want to create"  
+}
+
+variable "list_user" {
+  type = list(string)
+  description = "List of the User's name you want to create (passwords will be auto-generated)"  
+}

@@ -32,6 +32,20 @@ locals {
       encryption_key_name = null
     }
   ]
+
+  our_users = [
+    for x in range(0, length(var.list_user)) : {
+      name      = var.list_user[x]
+      password  = random_password.password[x].result
+    }
+  ]
+}
+
+resource "random_password" "password" {
+  count            = length(var.list_user)
+  length           = 16
+  special          = true
+  override_special = "_%@"
 }
 
 module "mysql-db" {
@@ -41,19 +55,29 @@ module "mysql-db" {
   name                 = var.name #mandatory
   database_version     = var.engine_version #mandatory
   project_id           = var.project_id #mandatory
+  region               = var.region
   zone                 = var.zone #mandatory
   tier                 = "db-custom-${var.nb_cpu}-${var.ram}"
 
-  db_collation        = "utf8_general_ci"
+  db_charset           = var.db_charset
+  db_collation         = var.db_collation
 
   # Storage
-  disk_autoresize       = true
-  disk_size             = var.disk_size
-  disk_type             = "PD_SSD"
+  disk_autoresize      = true
+  disk_size            = var.disk_size
+  disk_type            = "PD_SSD"
 
   # High Availability
-  availability_type     = var.high_availability ? "REGIONAL" : "ZONAL"
+  availability_type    = var.high_availability ? "REGIONAL" : "ZONAL"
 
   # Replicas
-  read_replicas         = local.replicas
+  read_replicas        = local.replicas
+
+  # Users
+  enable_default_user  = false
+  additional_users     = local.our_users
+
+  # Databases
+  enable_default_db     = false
+  additional_databases  = length(var.list_db) == 0 ? [] : var.list_db
 }
