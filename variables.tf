@@ -97,6 +97,11 @@ variable "ha_external_ip_range" {
 #   description = ""
 # }
 
+variable "instance_deletion_protection" {
+  type = bool
+  description = "Used to block Terraform from deleting a SQL Instance."
+  default = false
+}
 
 variable "list_db" {
   type = list(object({
@@ -110,4 +115,26 @@ variable "list_db" {
 variable "list_user" {
   type = list(string)
   description = "List of the User's name you want to create (passwords will be auto-generated)"  
+}
+
+variable "vpc_network" {
+  type = string
+  description = "Name of the VPC within the instance SQL is deployed"
+}
+
+
+variable "assign_public_ip" {
+  type = bool
+  description = "Set to true if the master instance should also have a public IP (less secure)."
+  default = false
+}
+
+variable "require_ssl" {
+  type = bool
+  description = "Set to false if you don not want to enforece SSL  (less secure)"
+  default = true
+}
+
+variable "private_network" {
+  type = string 
 }

@@ -12,7 +12,7 @@ locals {
     private_network = null
     authorized_networks = [
       {
-        name  = "${var.project_id}-cidr"
+        name  = "db-${var.name}-cidr"
         value = var.ha_external_ip_range
       },
     ]
@@ -80,4 +80,16 @@ module "mysql-db" {
   # Databases
   enable_default_db     = false
   additional_databases  = length(var.list_db) == 0 ? [] : var.list_db
+
+  # Instance
+  deletion_protection   = var.instance_deletion_protection
+
+  ip_configuration = {
+    ipv4_enabled = var.assign_public_ip
+    # We never set authorized networks, we need all connections via the
+    # public IP to be mediated by Cloud SQL.
+    authorized_networks = []
+    require_ssl         = var.require_ssl
+    private_network     = var.private_network 
+  }
 }
