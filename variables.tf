@@ -1,11 +1,11 @@
 variable "name" {
   type        = string
-  description = "The name of the Cloud SQL resource"
+  description = "The name of the Cloud SQL resource."
 }
 
 variable "project_id" {
   type        = string
-  description = "The project ID to manage the Cloud SQL resource"
+  description = "The project ID to manage the Cloud SQL resource."
 }
 
 variable "zone" {
@@ -46,31 +46,31 @@ variable "disk_size" {
 
 variable "high_availability" {
   type        = bool
-  description = "Activate or not high availability for your DB"
+  description = "Activate or not high availability for your DB."
   default     = true
 }
 
 variable "nb_replicas" {
   type        = number
-  description = "Number of read replicas you need"
+  description = "Number of read replicas you need."
   default     = 0
 }
 
 variable "db_collation" {
   type        = string
-  description = "Collation for the DB"
+  description = "Collation for the DB."
   default     = "utf8_general_ci"
 }
 
 variable "db_charset" {
   type        = string
-  description = "Charset for the DB"
+  description = "Charset for the DB."
   default     = "utf8"
 }
 
 variable "ha_external_ip_range" {
   type        = string
-  description = "The ip range to allow connecting from/to Cloud SQL"
+  description = "The ip range to allow connecting from/to Cloud SQL."
   default     = "192.10.10.10/32"
 }
 # variable "replicas" {
@@ -114,12 +114,12 @@ variable "list_db" {
 
 variable "list_user" {
   type = list(string)
-  description = "List of the User's name you want to create (passwords will be auto-generated)"  
+  description = "List of the User's name you want to create (passwords will be auto-generated)."  
 }
 
 variable "vpc_network" {
   type = string
-  description = "Name of the VPC within the instance SQL is deployed"
+  description = "Name of the VPC within the instance SQL is deployed."
 }
 
 
@@ -131,7 +131,7 @@ variable "assign_public_ip" {
 
 variable "require_ssl" {
   type = bool
-  description = "Set to false if you don not want to enforece SSL  (less secure)"
+  description = "Set to false if you don not want to enforece SSL  (less secure)."
   default = true
 }
 
