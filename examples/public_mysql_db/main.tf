@@ -1,4 +1,4 @@
-# Example of code for deploying a private MySQL DB with 1 replica
+# Example of code for deploying a public MySQL DB with 1 replica
 # We also create two users : Kylian & Antoine (with strong passwords auto-generated)
 locals {
   project_id = "padok-cloud-factory"
@@ -14,29 +14,10 @@ provider "google-beta" {
   region  = "europe-west3"
 }
 
-module "my_network" {
-  source = "github.com/padok-team/terraform-google-network"
-
-  name = "my-network"
-  subnets = {
-    "my-private-subnet-1" = {
-      cidr   = "10.30.0.0/16"
-      region = "europe-west3"
-    }
-  }
-  peerings = {
-    cloudsql = {
-      address = "10.0.17.0"
-      prefix  = 24
-    }
-  }
-}
-
-
-module "my-private-mysql-db" {
+module "my-public-mysql-db" {
   source = "../.."
 
-  name = "my-private-db1" #mandatory
+  name = "my-public-db1" #mandatory
   engine_version = "MYSQL_5_6"      #mandatory
   project_id     = local.project_id #mandatory
   region         = "europe-west1"
@@ -47,7 +28,7 @@ module "my-private-mysql-db" {
 
   disk_size = 10
 
-  nb_replicas = 1
+  nb_replicas = 0
 
   list_user = ["Kylian", "Antoine"]
 
@@ -60,5 +41,10 @@ module "my-private-mysql-db" {
   ]
   vpc_network = "default-europe-west1"
 
-  private_network = module.my_network.network.id
+  assign_public_ip = true
+
+  private_network = null
+
+  #require_ssl = false   // If needed
+
 }

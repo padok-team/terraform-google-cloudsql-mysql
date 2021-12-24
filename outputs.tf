@@ -9,7 +9,7 @@ output "instance_connection_name" {
 }
 
 output "read_replica_instance_names" {
-  value       =  module.mysql-db.read_replica_instance_names
+  value       = module.mysql-db.read_replica_instance_names
   description = "The instance names for the read replica instances."
 }
 
