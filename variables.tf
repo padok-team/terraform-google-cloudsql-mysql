@@ -1,32 +1,32 @@
 variable "name" {
-  type        = string
   description = "The name of the Cloud SQL resource."
+  type        = string
 }
 
 variable "project_id" {
-  type        = string
   description = "The project ID to manage the Cloud SQL resource."
+  type        = string
 }
 
 variable "zone" {
-  type        = string
   description = "The zone for the master instance, it should be something like: us-central1-a, us-east1-c, etc."
+  type        = string
 }
 
 variable "region" {
-  type        = string
   description = "The region for the master instance, it should be something like: us-central1-a, us-east1-c, etc."
+  type        = string
 }
 
 variable "engine_version" {
-  type        = string
   description = "The version of MySQL engine."
+  type        = string
   default     = "MYSQL_5_6"
 }
 
 variable "nb_cpu" {
-  type        = number
   description = "Number of virtual processors."
+  type        = number
 
   validation {
     condition     = var.nb_cpu == 1 || (var.nb_cpu >= 2 && var.nb_cpu <= 96 && var.nb_cpu % 2 == 0) # https://cloud.google.com/sql/docs/postgres/create-instance#machine-types
@@ -35,36 +35,36 @@ variable "nb_cpu" {
 }
 
 variable "ram" {
-  type        = number
   description = "Quantity of RAM (in Mb)."
+  type        = number
 }
 
 variable "disk_size" {
-  type        = number
   description = "Size of the db disk (in Gb)."
+  type        = number
 }
 
 variable "high_availability" {
-  type        = bool
   description = "Activate or not high availability for your DB."
+  type        = bool
   default     = true
 }
 
 variable "nb_replicas" {
-  type        = number
   description = "Number of read replicas you need."
+  type        = number
   default     = 0
 }
 
 variable "db_collation" {
-  type        = string
   description = "Collation for the DB."
+  type        = string
   default     = "utf8_general_ci"
 }
 
 variable "db_charset" {
-  type        = string
   description = "Charset for the DB."
+  type        = string
   default     = "utf8"
 }
 
@@ -75,44 +75,44 @@ variable "ha_external_ip_range" {
 }
 
 variable "instance_deletion_protection" {
-  type        = bool
   description = "Used to block Terraform from deleting a SQL Instance."
+  type        = bool
   default     = false
 }
 
 variable "list_db" {
+  description = "List of the default DBs you want to create."
   type = list(object({
     name      = string
     charset   = string
     collation = string
   }))
-  description = "List of the default DBs you want to create."
 }
 
 variable "list_user" {
-  type        = list(string)
   description = "List of the User's name you want to create (passwords will be auto-generated)."
+  type        = list(string)
 }
 
 variable "vpc_network" {
-  type        = string
   description = "Name of the VPC within the instance SQL is deployed."
+  type        = string
 }
 
 
 variable "assign_public_ip" {
-  type        = bool
   description = "Set to true if the master instance should also have a public IP (less secure)."
+  type        = bool
   default     = false
 }
 
 variable "require_ssl" {
-  type        = bool
   description = "Set to false if you don not want to enforece SSL  (less secure)."
+  type        = bool
   default     = true
 }
 
 variable "private_network" {
-  type        = string
   description = "Define the CIDR of your private network."
+  type        = string
 }
