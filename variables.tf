@@ -20,7 +20,7 @@ variable "region" {
 
 variable "engine_version" {
   type        = string
-  description = "The version of MySQL engine"
+  description = "The version of MySQL engine."
   default     = "MYSQL_5_6"
 }
 
