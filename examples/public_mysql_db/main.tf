@@ -1,4 +1,4 @@
-# Example of code for deploying a public MySQL DB with 1 replica
+# Example of code for deploying a public MySQL DB with 0 replica
 # We also create two users : Kylian & Antoine (with strong passwords auto-generated)
 locals {
   project_id = "padok-cloud-factory"
@@ -17,7 +17,7 @@ provider "google-beta" {
 module "my-public-mysql-db" {
   source = "../.."
 
-  name = "my-public-db1" #mandatory
+  name           = "my-public-db1"  #mandatory
   engine_version = "MYSQL_5_6"      #mandatory
   project_id     = local.project_id #mandatory
   region         = "europe-west1"
@@ -45,6 +45,6 @@ module "my-public-mysql-db" {
 
   private_network = null
 
-  #require_ssl = false   // If needed
+  #require_ssl = false   // By default, you must have a valid certificate to get connected to the DB as SSL is enabled. If you do not want, uncomment this line.
 
 }

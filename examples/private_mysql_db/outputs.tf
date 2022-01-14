@@ -33,4 +33,3 @@ output "additional_users" {
   ]
   sensitive = true
 }
-
