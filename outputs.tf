@@ -19,7 +19,7 @@ output "public_ip_address" {
 }
 
 output "private_ip_address" {
-  description = "The first private (PRIVATE) IPv4 address assigned for the master instance."
+  description = "The first private IPv4 address assigned for the master instance."
   value       = module.mysql-db.private_ip_address
 }
 
