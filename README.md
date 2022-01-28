@@ -10,7 +10,7 @@ Terraform module which creates **MYSQLDB** resources on **GCP**. This module is 
 - AAUser I can deploy a public/private MySQL Database with N replica
 - AAUser I can deploy a public/private MySQL Database with/without TLS encryption
 
-// By default, deployed Database is in HA mode, with a 7 retention days backup strategy.
+<em>By default, deployed Database is in HA mode, with a 7 retention days backup strategy.</em>
 ## Usage
 
 ```hcl
