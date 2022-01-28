@@ -16,9 +16,8 @@ provider "google-beta" {
 }
 
 module "my_network" {
-  source = "github.com/padok-team/terraform-google-network"
-
-  name = "my-network-1"
+  source = "git@github.com:padok-team/terraform-google-network.git?ref=v2.0.3"
+  name   = "my-network-1"
   subnets = {
     "my-private-subnet-1" = {
       cidr   = "10.30.0.0/16"

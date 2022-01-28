@@ -74,6 +74,7 @@ module "my-public-mysql-db" {
 | <a name="input_vpc_network"></a> [vpc\_network](#input\_vpc\_network) | Name of the VPC within the instance SQL is deployed. | `string` | n/a | yes |
 | <a name="input_zone"></a> [zone](#input\_zone) | The zone for the master instance, it should be something like: us-central1-a, us-east1-c, etc. | `string` | n/a | yes |
 | <a name="input_assign_public_ip"></a> [assign\_public\_ip](#input\_assign\_public\_ip) | Set to true if the master instance should also have a public IP (less secure). | `bool` | `false` | no |
+| <a name="input_backup_configuration"></a> [backup\_configuration](#input\_backup\_configuration) | The backup\_configuration settings subblock for the database setings. | `map` | <pre>{<br>  "binary_log_enabled": false,<br>  "enabled": false,<br>  "retained_backups": 7,<br>  "retention_unit": "COUNT",<br>  "start_time": "03:00",<br>  "transaction_log_retention_days": "7"<br>}</pre> | no |
 | <a name="input_db_charset"></a> [db\_charset](#input\_db\_charset) | Charset for the DB. | `string` | `"utf8"` | no |
 | <a name="input_db_collation"></a> [db\_collation](#input\_db\_collation) | Collation for the DB. | `string` | `"utf8_general_ci"` | no |
 | <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The version of MySQL engine. | `string` | `"MYSQL_5_6"` | no |

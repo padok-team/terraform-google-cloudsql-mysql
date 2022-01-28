@@ -50,6 +50,18 @@ variable "high_availability" {
   default     = true
 }
 
+variable "backup_configuration" {
+  description = "The backup_configuration settings subblock for the database setings."
+  default = {
+    binary_log_enabled             = false
+    enabled                        = false
+    start_time                     = "03:00" // Time when backcup configuration is starting
+    transaction_log_retention_days = "7"     //The number of days of transaction logs we retain for point in time restore, from 1-7.
+    retained_backups               = 7
+    retention_unit                 = "COUNT"
+  }
+}
+
 variable "nb_replicas" {
   description = "Number of read replicas you need."
   type        = number

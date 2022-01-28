@@ -65,6 +65,17 @@ module "mysql-db" {
   # High Availability
   availability_type = var.high_availability ? "REGIONAL" : "ZONAL"
 
+  # Backup
+  backup_configuration = {
+    location                       = var.region
+    binary_log_enabled             = var.high_availability
+    enabled                        = var.high_availability
+    start_time                     = "03:00" // UTC Time when backup configuration is starting.
+    transaction_log_retention_days = "7"     // The number of days of transaction logs we retain for point in time restore, from 1-7.
+    retained_backups               = 7       // Number of days we keep backups.
+    retention_unit                 = "COUNT"
+  }
+
   # Replicas
   read_replicas = local.replicas
 
