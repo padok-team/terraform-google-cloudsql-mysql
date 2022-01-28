@@ -90,7 +90,7 @@ variable "list_db" {
 }
 
 variable "list_user" {
-  description = "List of the User's name you want to create (passwords will be auto-generated)."
+  description = "List of the User's name you want to create (passwords will be auto-generated). Warning! All those users will be admin and have access to all databases created with this module."
   type        = list(string)
 }
 
