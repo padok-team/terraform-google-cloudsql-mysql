@@ -17,7 +17,7 @@ Terraform module which creates **MYSQLDB** resources on **GCP**. This module is 
 module "my-public-mysql-db" {
   source = "https://github.com/padok-team/terraform-google-cloudsql-mysql"
 
-  name = "my-public-db1" #mandatory
+  name           = "my-public-db1"  #mandatory
   engine_version = "MYSQL_5_6"      #mandatory
   project_id     = local.project_id #mandatory
   region         = "europe-west1"
