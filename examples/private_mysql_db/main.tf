@@ -49,9 +49,9 @@ module "my-private-mysql-db" {
 
   nb_replicas = 2
 
-  list_user = ["Kylian", "Antoine"]
+  additional_users = ["Kylian", "Antoine"]
 
-  list_db = [
+  additional_databases = [
     {
       name : "MYDB_1"
       charset : "utf8"

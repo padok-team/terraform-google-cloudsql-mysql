@@ -30,9 +30,9 @@ module "my-public-mysql-db" {
 
   nb_replicas = 0
 
-  list_user = ["Kylian", "Antoine"]
+  additional_users = ["Kylian", "Antoine"]
 
-  list_db = [
+  additional_databases = [
     {
       name : "MYDB_1"
       charset : "utf8"
@@ -63,9 +63,9 @@ module "my-public-mysql-db" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_additional_databases"></a> [additional\_databases](#input\_additional\_databases) | List of the default DBs you want to create. | <pre>list(object({<br>    name      = string<br>    charset   = string<br>    collation = string<br>  }))</pre> | n/a | yes |
+| <a name="input_additional_users"></a> [additional\_users](#input\_additional\_users) | List of the User's name you want to create (passwords will be auto-generated). Warning! All those users will be admin and have access to all databases created with this module. | `list(string)` | n/a | yes |
 | <a name="input_disk_size"></a> [disk\_size](#input\_disk\_size) | Size of the db disk (in Gb). | `number` | n/a | yes |
-| <a name="input_list_db"></a> [list\_db](#input\_list\_db) | List of the default DBs you want to create. | <pre>list(object({<br>    name      = string<br>    charset   = string<br>    collation = string<br>  }))</pre> | n/a | yes |
-| <a name="input_list_user"></a> [list\_user](#input\_list\_user) | List of the User's name you want to create (passwords will be auto-generated). Warning! All those users will be admin and have access to all databases created with this module. | `list(string)` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The name of the Cloud SQL resource. | `string` | n/a | yes |
 | <a name="input_nb_cpu"></a> [nb\_cpu](#input\_nb\_cpu) | Number of virtual processors. | `number` | n/a | yes |
 | <a name="input_private_network"></a> [private\_network](#input\_private\_network) | Define the CIDR of your private network. | `string` | n/a | yes |

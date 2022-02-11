@@ -29,15 +29,15 @@ locals {
   ]
 
   our_users = [
-    for x in range(0, length(var.list_user)) : {
-      name     = var.list_user[x]
+    for x in range(0, length(var.additional_users)) : {
+      name     = var.additional_users[x]
       password = random_password.password[x].result
     }
   ]
 }
 
 resource "random_password" "password" {
-  count            = length(var.list_user)
+  count            = length(var.additional_users)
   length           = 16
   special          = true
   override_special = "_%@"
@@ -85,7 +85,7 @@ module "mysql-db" {
 
   # Databases
   enable_default_db    = false
-  additional_databases = length(var.list_db) == 0 ? [] : var.list_db
+  additional_databases = length(var.additional_databases) == 0 ? [] : var.additional_databases
 
   # Instance
   deletion_protection = var.instance_deletion_protection

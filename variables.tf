@@ -92,7 +92,7 @@ variable "instance_deletion_protection" {
   default     = false
 }
 
-variable "list_db" {
+variable "additional_databases" {
   description = "List of the default DBs you want to create."
   type = list(object({
     name      = string
@@ -101,7 +101,7 @@ variable "list_db" {
   }))
 }
 
-variable "list_user" {
+variable "additional_users" {
   description = "List of the User's name you want to create (passwords will be auto-generated). Warning! All those users will be admin and have access to all databases created with this module."
   type        = list(string)
 }
