@@ -1,6 +1,6 @@
 # Google Cloud SQL (MySQL) Terraform module
 
-Terraform module which creates **MYSQLDB** resources on **GCP**. This module is an abstraction of the [terraform-google-sql for MySQL](https://github.com/terraform-google-modules/terraform-google-sql-db/tree/master/modules/mysql) by Google itsel.
+Terraform module which creates **MYSQLDB** resources on **GCP**. This module is an abstraction of the [terraform-google-sql for MySQL](https://github.com/terraform-google-modules/terraform-google-sql-db/tree/master/modules/mysql) by Google itself.
 
 ## User Stories for this module
 
@@ -83,7 +83,7 @@ module "my-public-mysql-db" {
 | <a name="input_high_availability"></a> [high\_availability](#input\_high\_availability) | Activate or not high availability for your DB. | `bool` | `true` | no |
 | <a name="input_instance_deletion_protection"></a> [instance\_deletion\_protection](#input\_instance\_deletion\_protection) | Used to block Terraform from deleting a SQL Instance. | `bool` | `false` | no |
 | <a name="input_nb_replicas"></a> [nb\_replicas](#input\_nb\_replicas) | Number of read replicas you need. | `number` | `0` | no |
-| <a name="input_require_ssl"></a> [require\_ssl](#input\_require\_ssl) | Set to false if you don not want to enforece SSL  (less secure). | `bool` | `true` | no |
+| <a name="input_require_ssl"></a> [require\_ssl](#input\_require\_ssl) | Set to false if you do not want to enforce SSL (less secure). | `bool` | `true` | no |
 
 ## Outputs
 

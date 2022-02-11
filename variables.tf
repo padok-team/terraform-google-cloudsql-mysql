@@ -56,7 +56,7 @@ variable "backup_configuration" {
     binary_log_enabled             = false
     enabled                        = false
     start_time                     = "03:00" // Time when backcup configuration is starting
-    transaction_log_retention_days = "7"     //The number of days of transaction logs we retain for point in time restore, from 1-7.
+    transaction_log_retention_days = "7"     // The number of days of transaction logs we retain for point in time restore, from 1-7.
     retained_backups               = 7
     retention_unit                 = "COUNT"
   }
@@ -119,7 +119,7 @@ variable "assign_public_ip" {
 }
 
 variable "require_ssl" {
-  description = "Set to false if you don not want to enforece SSL  (less secure)."
+  description = "Set to false if you do not want to enforce SSL (less secure)."
   type        = bool
   default     = true
 }
