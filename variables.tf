@@ -1,140 +1,130 @@
 variable "name" {
+  description = "The name of the Cloud SQL resource."
   type        = string
-  description = "The name of the Cloud SQL resource"
 }
 
 variable "project_id" {
+  description = "The project ID to manage the Cloud SQL resource."
   type        = string
-  description = "The project ID to manage the Cloud SQL resource"
 }
 
 variable "zone" {
-  type        = string
   description = "The zone for the master instance, it should be something like: us-central1-a, us-east1-c, etc."
+  type        = string
 }
 
 variable "region" {
-  type        = string
   description = "The region for the master instance, it should be something like: us-central1-a, us-east1-c, etc."
+  type        = string
 }
 
 variable "engine_version" {
+  description = "The version of MySQL engine."
   type        = string
-  description = ""
   default     = "MYSQL_5_6"
 }
 
 variable "nb_cpu" {
+  description = "Number of virtual processors."
   type        = number
-  description = "Number of virtual processors"
 
   validation {
-    condition     = var.nb_cpu == 1 || (var.nb_cpu >= 2 &&var.nb_cpu <= 96 && var.nb_cpu % 2 == 0) # https://cloud.google.com/sql/docs/postgres/create-instance#machine-types
+    condition     = var.nb_cpu == 1 || (var.nb_cpu >= 2 && var.nb_cpu <= 96 && var.nb_cpu % 2 == 0) # https://cloud.google.com/sql/docs/postgres/create-instance#machine-types
     error_message = "Error: invalid number of CPU. Set an even number of processors between 2 and 96 (or 1)."
   }
 }
 
 variable "ram" {
+  description = "Quantity of RAM (in Mb)."
   type        = number
-  description = "Quantity of RAM (in Mb)"
 }
 
 variable "disk_size" {
-  type        = number
   description = "Size of the db disk (in Gb)."
+  type        = number
 }
 
 variable "high_availability" {
+  description = "Activate or not high availability for your DB."
   type        = bool
-  description = "Activate or not high availability for your DB"
   default     = true
 }
 
+variable "backup_configuration" {
+  description = "The backup_configuration settings subblock for the database setings."
+  default = {
+    binary_log_enabled             = false
+    enabled                        = false
+    start_time                     = "03:00" // Time when backcup configuration is starting
+    transaction_log_retention_days = "7"     // The number of days of transaction logs we retain for point in time restore, from 1-7.
+    retained_backups               = 7
+    retention_unit                 = "COUNT"
+  }
+}
+
 variable "nb_replicas" {
+  description = "Number of read replicas you need."
   type        = number
-  description = "Number of read replicas you need"
   default     = 0
 }
 
 variable "db_collation" {
+  description = "Collation for the DB."
   type        = string
-  description = "Collation for the DB"
   default     = "utf8_general_ci"
 }
 
 variable "db_charset" {
+  description = "Charset for the DB."
   type        = string
-  description = "Charset for the DB"
   default     = "utf8"
 }
 
 variable "ha_external_ip_range" {
   type        = string
-  description = "The ip range to allow connecting from/to Cloud SQL"
+  description = "The ip range to allow connecting from/to Cloud SQL."
   default     = "192.10.10.10/32"
 }
-# variable "replicas" {
-#   type        = list(object({
-#     name            = string
-#     tier            = string
-#     zone            = string
-#     disk_type       = string
-#     disk_autoresize = bool
-#     disk_size       = string
-#     user_labels     = map(string)
-#     database_flags  = list(object({
-#       name  = string
-#       value = string
-#     }))
-#     ip_configuration      = object({
-#       authorized_networks = list(map(string))
-#       ipv4_enabled        = bool
-#       private_network     = string
-#       require_ssl         = bool
-#     })
-#     encryption_key_name = string
-#   }))
-#   description = ""
-# }
 
 variable "instance_deletion_protection" {
-  type = bool
   description = "Used to block Terraform from deleting a SQL Instance."
-  default = false
+  type        = bool
+  default     = false
 }
 
-variable "list_db" {
+variable "additional_databases" {
+  description = "List of the default DBs you want to create."
   type = list(object({
-    name = string
-    charset = string
+    name      = string
+    charset   = string
     collation = string
   }))
-  description = "List of the default DBs you want to create"  
 }
 
-variable "list_user" {
-  type = list(string)
-  description = "List of the User's name you want to create (passwords will be auto-generated)"  
+variable "additional_users" {
+  description = "List of the User's name you want to create (passwords will be auto-generated). Warning! All those users will be admin and have access to all databases created with this module."
+  type        = list(string)
 }
 
 variable "vpc_network" {
-  type = string
-  description = "Name of the VPC within the instance SQL is deployed"
+  description = "Name of the VPC within the instance SQL is deployed."
+  type        = string
 }
 
 
 variable "assign_public_ip" {
-  type = bool
   description = "Set to true if the master instance should also have a public IP (less secure)."
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "require_ssl" {
-  type = bool
-  description = "Set to false if you don not want to enforece SSL  (less secure)"
-  default = true
+  description = "Set to false if you do not want to enforce SSL (less secure)."
+  type        = bool
+  default     = true
 }
 
 variable "private_network" {
-  type = string 
+  description = "Define the CIDR of your private network."
+  type        = string
 }
